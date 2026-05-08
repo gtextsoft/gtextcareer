@@ -177,18 +177,25 @@ applyForm?.addEventListener('submit', (e) => {
         submitBtn.textContent = 'Submitting...';
     }
 
-    fetch('/api/applications', {
+    const payload = new URLSearchParams({
+        role,
+        fullName,
+        email,
+        phone,
+        portfolio,
+        note,
+        sourcePage: 'index',
+        _subject: `New Career Application: ${role}`,
+        _template: 'table',
+    });
+
+    fetch('https://formsubmit.co/ajax/hr@gtextholdings.com', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            role,
-            fullName,
-            email,
-            phone,
-            portfolio,
-            note,
-            sourcePage: 'index',
-        }),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            Accept: 'application/json',
+        },
+        body: payload.toString(),
     })
         .then(async (response) => {
             if (!response.ok) {
