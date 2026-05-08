@@ -113,6 +113,7 @@ const modalRoleName = document.getElementById('modalRoleName');
 const applyForm = document.getElementById('applicationForm');
 const successMessage = document.getElementById('successMessage');
 const selectedRoleInput = document.getElementById('selectedRoleInput');
+const roleSelectInput = document.getElementById('roleSelectInput');
 
 const fullNameInput = document.getElementById('fullNameInput');
 const emailInput = document.getElementById('emailInput');
@@ -121,10 +122,28 @@ const portfolioInput = document.getElementById('portfolioInput');
 const messageInput = document.getElementById('messageInput');
 let bodyScrollLockPadding = '';
 let modalSource = 'index';
+const knownRoles = [
+    'Sales Manager',
+    'Investment Consultant',
+    'Video Editor',
+    'Graphic Designer',
+    'CFU Specialist',
+    'Software Engineer',
+    'AI Engineer',
+];
 
 const prepareModal = (roleName, source = 'index') => {
     if (selectedRoleInput) selectedRoleInput.value = roleName;
-    if (modalRoleName) modalRoleName.textContent = roleName;
+    if (roleSelectInput) {
+        if (knownRoles.includes(roleName)) {
+            roleSelectInput.value = roleName;
+        } else if (roleName === 'Talent Pool Application' || roleName === 'Talent Network Application') {
+            roleSelectInput.value = 'General Talent Pool';
+        } else {
+            roleSelectInput.value = '';
+        }
+    }
+    if (modalRoleName) modalRoleName.textContent = roleName || 'Select your preferred role and submit your application.';
     if (applyForm) applyForm.style.display = 'grid';
     if (successMessage) successMessage.style.display = 'none';
     modalSource = source;
@@ -179,7 +198,7 @@ window.addEventListener('click', (e) => {
 
 applyForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    const role = selectedRoleInput?.value || 'Open Role';
+    const role = roleSelectInput?.value || selectedRoleInput?.value || 'Open Role';
     const fullName = fullNameInput?.value?.trim() || '';
     const email = emailInput?.value?.trim() || '';
     const phone = phoneInput?.value?.trim() || '';

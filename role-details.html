@@ -106,6 +106,20 @@
             <form id="applicationForm" class="apply-form">
                 <input id="selectedRoleInput" type="hidden">
                 <div class="form-group">
+                    <label>Preferred Role</label>
+                    <select id="roleSelectInput" required>
+                        <option value="">Select a role</option>
+                        <option value="Sales Manager">Sales Manager</option>
+                        <option value="Investment Consultant">Investment Consultant</option>
+                        <option value="Video Editor">Video Editor</option>
+                        <option value="Graphic Designer">Graphic Designer</option>
+                        <option value="CFU Specialist">CFU Specialist</option>
+                        <option value="Software Engineer">Software Engineer</option>
+                        <option value="AI Engineer">AI Engineer</option>
+                        <option value="General Talent Pool">General Talent Pool</option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label>Full Name</label>
                     <input id="fullNameInput" type="text" placeholder="Enter your full name" required>
                 </div>
@@ -284,6 +298,7 @@
         const applyForm = document.getElementById('applicationForm');
         const successMessage = document.getElementById('successMessage');
         const selectedRoleInput = document.getElementById('selectedRoleInput');
+        const roleSelectInput = document.getElementById('roleSelectInput');
         const fullNameInput = document.getElementById('fullNameInput');
         const emailInput = document.getElementById('emailInput');
         const phoneInput = document.getElementById('phoneInput');
@@ -291,10 +306,28 @@
         const messageInput = document.getElementById('messageInput');
         let bodyScrollLockPadding = '';
         let modalSource = 'role-details';
+        const knownRoles = [
+            'Sales Manager',
+            'Investment Consultant',
+            'Video Editor',
+            'Graphic Designer',
+            'CFU Specialist',
+            'Software Engineer',
+            'AI Engineer',
+        ];
 
         const prepareModal = (roleName, source = 'role-details') => {
             if (selectedRoleInput) selectedRoleInput.value = roleName;
-            if (modalRoleName) modalRoleName.textContent = roleName;
+            if (roleSelectInput) {
+                if (knownRoles.includes(roleName)) {
+                    roleSelectInput.value = roleName;
+                } else if (roleName === 'Talent Pool Application' || roleName === 'Talent Network Application') {
+                    roleSelectInput.value = 'General Talent Pool';
+                } else {
+                    roleSelectInput.value = '';
+                }
+            }
+            if (modalRoleName) modalRoleName.textContent = roleName || 'Select your preferred role and submit your application.';
             if (applyForm) applyForm.style.display = 'grid';
             if (successMessage) successMessage.style.display = 'none';
             modalSource = source;
@@ -349,7 +382,7 @@
 
         applyForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const selectedRole = selectedRoleInput?.value || role.title;
+            const selectedRole = roleSelectInput?.value || selectedRoleInput?.value || role.title;
             const fullName = fullNameInput?.value?.trim() || '';
             const email = emailInput?.value?.trim() || '';
             const phone = phoneInput?.value?.trim() || '';
