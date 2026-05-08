@@ -120,6 +120,15 @@ const phoneInput = document.getElementById('phoneInput');
 const portfolioInput = document.getElementById('portfolioInput');
 const messageInput = document.getElementById('messageInput');
 let bodyScrollLockPadding = '';
+let modalSource = 'index';
+
+const prepareModal = (roleName, source = 'index') => {
+    if (selectedRoleInput) selectedRoleInput.value = roleName;
+    if (modalRoleName) modalRoleName.textContent = roleName;
+    if (applyForm) applyForm.style.display = 'grid';
+    if (successMessage) successMessage.style.display = 'none';
+    modalSource = source;
+};
 
 const openModal = () => {
     if (!modal) return;
@@ -143,14 +152,20 @@ document.querySelectorAll('.apply-link').forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         const roleName = link.closest('.job-card')?.dataset.role || 'Open Role';
-        if (selectedRoleInput) selectedRoleInput.value = roleName;
-        if (modalRoleName) modalRoleName.textContent = roleName;
-        if (applyForm) applyForm.style.display = 'grid';
-        if (successMessage) successMessage.style.display = 'none';
+        prepareModal(roleName, 'index-roles');
 
         if (modal) {
             openModal();
         }
+    });
+});
+
+document.querySelectorAll('.modal-trigger').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const roleName = trigger.getAttribute('data-modal-role') || 'General Application';
+        prepareModal(roleName, 'index-cta');
+        openModal();
     });
 });
 
@@ -177,25 +192,25 @@ applyForm?.addEventListener('submit', (e) => {
         submitBtn.textContent = 'Submitting...';
     }
 
-    const payload = new URLSearchParams({
+    const payload = {
+        email,
         role,
         fullName,
-        email,
         phone,
         portfolio,
         note,
-        sourcePage: 'index',
-        _subject: `New Career Application: ${role}`,
-        _template: 'table',
-    });
+        sourcePage: modalSource,
+        subject: `New Career Application: ${role}`,
+        message: `Role: ${role}\nFull Name: ${fullName}\nEmail: ${email}\nPhone: ${phone}\nPortfolio/LinkedIn: ${portfolio}\nShort Note: ${note}`,
+    };
 
-    fetch('https://formsubmit.co/ajax/hr@gtextholdings.com', {
+    fetch('https://formspree.io/f/mzdojbrq', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'Content-Type': 'application/json',
             Accept: 'application/json',
         },
-        body: payload.toString(),
+        body: JSON.stringify(payload),
     })
         .then(async (response) => {
             if (!response.ok) {

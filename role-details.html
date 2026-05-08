@@ -26,7 +26,7 @@
                     <h1 id="roleTitle">Role Title</h1>
                     <div class="role-actions role-actions-top">
                         <a id="applyFromDetailTop" href="#" class="btn btn-primary">Apply for this role</a>
-                        <a href="mailto:hr@gtextholdings.com?subject=Recruitment%20Inquiry" class="btn btn-secondary">Contact HR</a>
+                        <a href="#" class="btn btn-secondary modal-trigger-detail" data-modal-role="Recruitment Inquiry">Contact HR</a>
                     </div>
                 </div>
 
@@ -80,7 +80,7 @@
 
                 <div class="role-actions">
                     <a id="applyFromDetail" href="#" class="btn btn-primary">Apply for this role</a>
-                    <a href="mailto:hr@gtextholdings.com?subject=Recruitment%20Inquiry" class="btn btn-secondary">Contact HR</a>
+                    <a href="#" class="btn btn-secondary modal-trigger-detail" data-modal-role="Recruitment Inquiry">Contact HR</a>
                 </div>
             </article>
         </div>
@@ -290,14 +290,18 @@
         const portfolioInput = document.getElementById('portfolioInput');
         const messageInput = document.getElementById('messageInput');
         let bodyScrollLockPadding = '';
+        let modalSource = 'role-details';
+
+        const prepareModal = (roleName, source = 'role-details') => {
+            if (selectedRoleInput) selectedRoleInput.value = roleName;
+            if (modalRoleName) modalRoleName.textContent = roleName;
+            if (applyForm) applyForm.style.display = 'grid';
+            if (successMessage) successMessage.style.display = 'none';
+            modalSource = source;
+        };
 
         const openModal = () => {
             if (!modal) return;
-            if (selectedRoleInput) selectedRoleInput.value = role.title;
-            if (modalRoleName) modalRoleName.textContent = role.title;
-            if (applyForm) applyForm.style.display = 'grid';
-            if (successMessage) successMessage.style.display = 'none';
-
             modal.classList.add('active');
             document.body.classList.add('modal-open');
             const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
@@ -316,12 +320,23 @@
 
         document.getElementById('applyFromDetail').addEventListener('click', (e) => {
             e.preventDefault();
+            prepareModal(role.title, 'role-details-apply');
             openModal();
         });
 
         document.getElementById('applyFromDetailTop').addEventListener('click', (e) => {
             e.preventDefault();
+            prepareModal(role.title, 'role-details-apply');
             openModal();
+        });
+
+        document.querySelectorAll('.modal-trigger-detail').forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const roleName = trigger.getAttribute('data-modal-role') || 'Recruitment Inquiry';
+                prepareModal(roleName, 'role-details-contact');
+                openModal();
+            });
         });
 
         document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
@@ -346,25 +361,25 @@
                 submitBtn.textContent = 'Submitting...';
             }
 
-            const payload = new URLSearchParams({
+            const payload = {
+                email,
                 role: selectedRole,
                 fullName,
-                email,
                 phone,
                 portfolio,
                 note,
-                sourcePage: 'role-details',
-                _subject: `New Career Application: ${selectedRole}`,
-                _template: 'table',
-            });
+                sourcePage: modalSource,
+                subject: `New Career Application: ${selectedRole}`,
+                message: `Role: ${selectedRole}\nFull Name: ${fullName}\nEmail: ${email}\nPhone: ${phone}\nPortfolio/LinkedIn: ${portfolio}\nShort Note: ${note}`,
+            };
 
-            fetch('https://formsubmit.co/ajax/hr@gtextholdings.com', {
+            fetch('https://formspree.io/f/mzdojbrq', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                    'Content-Type': 'application/json',
                     Accept: 'application/json',
                 },
-                body: payload.toString(),
+                body: JSON.stringify(payload),
             })
                 .then(async (response) => {
                     if (!response.ok) {
