@@ -41,6 +41,16 @@
                 </section>
 
                 <section class="role-section">
+                    <h2>Role Snapshot</h2>
+                    <ul id="roleSnapshot"></ul>
+                </section>
+
+                <section class="role-section">
+                    <h2>Work Model, Benefits & Compensation</h2>
+                    <ul id="roleWorkModel"></ul>
+                </section>
+
+                <section class="role-section">
                     <h2>Key Responsibilities</h2>
                     <ul id="roleResponsibilities"></ul>
                 </section>
@@ -52,30 +62,27 @@
 
                 <section class="role-section">
                     <h2>About You</h2>
-                    <ul>
-                        <li>You communicate clearly and collaborate effectively across teams.</li>
-                        <li>You are proactive and comfortable taking ownership of outcomes.</li>
-                        <li>You value speed, clarity, and execution quality.</li>
-                    </ul>
+                    <ul id="roleAboutYou"></ul>
                 </section>
 
                 <section class="role-section">
                     <h2>What Success Looks Like</h2>
-                    <ul>
-                        <li>You ramp quickly and contribute meaningful value in the first 90 days.</li>
-                        <li>You improve team outcomes through quality work and reliable delivery.</li>
-                        <li>You help strengthen systems and standards as the business scales.</li>
-                    </ul>
+                    <ul id="roleSuccessMetrics"></ul>
+                </section>
+
+                <section class="role-section">
+                    <h2>First 90 Days Deliverables</h2>
+                    <ul id="roleDeliverables"></ul>
+                </section>
+
+                <section class="role-section">
+                    <h2>Tools & Systems You'll Use</h2>
+                    <ul id="roleTools"></ul>
                 </section>
 
                 <section class="role-section">
                     <h2>What To Expect In The Hiring Process</h2>
-                    <ul>
-                        <li>Application review by the recruitment team.</li>
-                        <li>Short introductory call.</li>
-                        <li>Role-specific assessment or portfolio review.</li>
-                        <li>Final team interview and decision update.</li>
-                    </ul>
+                    <ul id="roleHiringProcess"></ul>
                 </section>
 
                 <div class="role-actions">
@@ -116,8 +123,36 @@
                         <option value="CFU Specialist">CFU Specialist</option>
                         <option value="Software Engineer">Software Engineer</option>
                         <option value="AI Engineer">AI Engineer</option>
+                        <option value="Legal Counsel">Legal Counsel</option>
+                        <option value="Compliance Officer">Compliance Officer</option>
+                        <option value="Corporate Security Lead">Corporate Security Lead</option>
+                        <option value="Site Safety Officer">Site Safety Officer</option>
+                        <option value="Office Assistant">Office Assistant</option>
+                        <option value="Administrative Executive">Administrative Executive</option>
+                        <option value="Performance Marketing Specialist">Performance Marketing Specialist</option>
+                        <option value="Media Buying Manager">Media Buying Manager</option>
+                        <option value="Construction Project Manager">Construction Project Manager</option>
+                        <option value="Site Engineer">Site Engineer</option>
+                        <option value="Civil Engineer">Civil Engineer</option>
+                        <option value="Quantity Surveyor">Quantity Surveyor</option>
+                        <option value="Architect">Architect</option>
+                        <option value="Structural Engineer">Structural Engineer</option>
+                        <option value="MEP Engineer">MEP Engineer</option>
+                        <option value="Procurement Engineer">Procurement Engineer</option>
+                        <option value="Construction Supervisor">Construction Supervisor</option>
+                        <option value="Quality Control Engineer">Quality Control Engineer</option>
+                        <option value="HSE Officer">HSE Officer</option>
+                        <option value="Internship Program">Internship Program</option>
+                        <option value="Graduate Trainee Program">Graduate Trainee Program</option>
+                        <option value="General Manager">General Manager</option>
+                        <option value="Head of Operations">Head of Operations</option>
                         <option value="General Talent Pool">General Talent Pool</option>
+                        <option value="Other">Other (specify)</option>
                     </select>
+                </div>
+                <div class="form-group" id="customRoleGroup" style="display: none;">
+                    <label>Other Role / Category</label>
+                    <input id="customRoleInput" type="text" placeholder="Enter preferred role/category" minlength="2" maxlength="120">
                 </div>
                 <div class="form-group">
                     <label>Full Name</label>
@@ -268,29 +303,533 @@
             }
         };
 
+        Object.assign(roles, {
+            'legal-counsel': {
+                title: 'Legal Counsel',
+                team: 'Legal & Compliance',
+                location: 'Lagos / Hybrid',
+                purpose: 'Provide proactive legal support across property acquisition, contracts, and regulatory compliance.',
+                responsibilities: [
+                    'Draft, review, and negotiate property and vendor agreements.',
+                    'Advise internal teams on legal risk and compliance requirements.',
+                    'Coordinate with external counsel on disputes and regulatory matters.'
+                ],
+                qualifications: [
+                    'LL.B and active legal practice experience in corporate or real estate law.',
+                    'Strong contract drafting and negotiation skills.',
+                    'Clear understanding of Nigerian property and commercial regulations.'
+                ]
+            },
+            'compliance-officer': {
+                title: 'Compliance Officer',
+                team: 'Legal & Compliance',
+                location: 'Lagos / Hybrid',
+                purpose: 'Ensure company operations align with regulatory requirements and internal governance standards.',
+                responsibilities: [
+                    'Monitor compliance controls across departments and projects.',
+                    'Prepare compliance reports, audits, and risk assessments.',
+                    'Train teams on policy adherence and regulatory updates.'
+                ],
+                qualifications: [
+                    'Experience in compliance, risk, or internal control functions.',
+                    'Strong documentation and reporting discipline.',
+                    'Knowledge of corporate compliance frameworks and audit readiness.'
+                ]
+            },
+            'corporate-security-lead': {
+                title: 'Corporate Security Lead',
+                team: 'Security & Safety',
+                location: 'Lagos / Hybrid',
+                purpose: 'Lead enterprise-wide physical security strategy for offices, estates, and operational sites.',
+                responsibilities: [
+                    'Design and enforce corporate security procedures and response plans.',
+                    'Supervise security personnel and vendor service standards.',
+                    'Investigate incidents and recommend preventive controls.'
+                ],
+                qualifications: [
+                    'Proven security operations leadership experience.',
+                    'Strong incident management and stakeholder coordination skills.',
+                    'Knowledge of surveillance, access control, and risk protocols.'
+                ]
+            },
+            'site-safety-officer': {
+                title: 'Site Safety Officer',
+                team: 'Security & Safety',
+                location: 'Lagos / Hybrid',
+                purpose: 'Maintain safe construction and site operations by enforcing HSE standards daily.',
+                responsibilities: [
+                    'Conduct safety inspections and toolbox talks on active sites.',
+                    'Track incidents, near misses, and corrective actions.',
+                    'Ensure PPE compliance and emergency preparedness.'
+                ],
+                qualifications: [
+                    'Experience in site safety or HSE operations.',
+                    'Relevant HSE certifications are an advantage.',
+                    'Strong observation, reporting, and enforcement discipline.'
+                ]
+            },
+            'office-assistant': {
+                title: 'Office Assistant',
+                team: 'Office & Admin',
+                location: 'Lagos / Hybrid',
+                purpose: 'Support day-to-day office operations and ensure smooth administrative execution.',
+                responsibilities: [
+                    'Handle document filing, dispatch, and front-office support tasks.',
+                    'Coordinate meeting logistics and office supplies.',
+                    'Support admin team with routine internal requests.'
+                ],
+                qualifications: [
+                    'Prior office/admin support experience preferred.',
+                    'Strong organization and communication skills.',
+                    'Ability to manage multiple tasks reliably.'
+                ]
+            },
+            'administrative-executive': {
+                title: 'Administrative Executive',
+                team: 'Office & Admin',
+                location: 'Lagos / Hybrid',
+                purpose: 'Coordinate administrative systems and improve operational efficiency across business units.',
+                responsibilities: [
+                    'Manage schedules, records, and administrative workflows.',
+                    'Support procurement and vendor coordination activities.',
+                    'Track admin KPIs and drive process improvements.'
+                ],
+                qualifications: [
+                    'Experience in administrative coordination or office management.',
+                    'Strong reporting and planning capability.',
+                    'High attention to detail and execution speed.'
+                ]
+            },
+            'performance-marketing-specialist': {
+                title: 'Performance Marketing Specialist',
+                team: 'Marketing & Ads',
+                location: 'Remote / Hybrid',
+                purpose: 'Drive qualified lead generation through data-backed paid media campaigns.',
+                responsibilities: [
+                    'Plan and optimize paid campaigns across digital channels.',
+                    'Monitor CAC, ROAS, and conversion performance metrics.',
+                    'Collaborate with content and design teams for ad creatives.'
+                ],
+                qualifications: [
+                    'Hands-on experience managing digital ad campaigns.',
+                    'Strong performance analytics and attribution understanding.',
+                    'Ability to test, iterate, and scale winning campaigns.'
+                ]
+            },
+            'media-buying-manager': {
+                title: 'Media Buying Manager',
+                team: 'Marketing & Ads',
+                location: 'Remote / Hybrid',
+                purpose: 'Lead media buying strategy and budget allocation to maximize campaign returns.',
+                responsibilities: [
+                    'Own planning, bidding, and budget execution for paid channels.',
+                    'Build audience strategies and optimize funnel performance.',
+                    'Deliver weekly media insights and optimization recommendations.'
+                ],
+                qualifications: [
+                    'Strong media buying experience with measurable results.',
+                    'Comfortable with campaign analytics and spend governance.',
+                    'Excellent decision-making under performance targets.'
+                ]
+            },
+            'construction-project-manager': {
+                title: 'Construction Project Manager',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Lead end-to-end construction delivery across timeline, quality, scope, and budget.',
+                responsibilities: [
+                    'Develop project plans, milestones, and execution schedules.',
+                    'Coordinate consultants, contractors, and internal teams.',
+                    'Monitor quality standards, cost control, and delivery risks.'
+                ],
+                qualifications: [
+                    'Project management experience in construction delivery.',
+                    'Strong coordination and stakeholder management skills.',
+                    'Good understanding of site execution and contract administration.'
+                ]
+            },
+            'site-engineer': {
+                title: 'Site Engineer',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Oversee daily technical site activities and ensure work aligns with approved designs.',
+                responsibilities: [
+                    'Supervise on-site construction tasks and contractor performance.',
+                    'Verify setting-out, drawings, and material usage on site.',
+                    'Prepare daily/weekly technical progress updates.'
+                ],
+                qualifications: [
+                    'Engineering background with site supervision experience.',
+                    'Ability to read and interpret construction drawings.',
+                    'Strong communication and issue-resolution capability.'
+                ]
+            },
+            'civil-engineer': {
+                title: 'Civil Engineer',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Support planning and execution of civil works for durable, compliant infrastructure.',
+                responsibilities: [
+                    'Prepare technical designs and review civil execution quality.',
+                    'Monitor structural and infrastructural works on site.',
+                    'Ensure compliance with engineering codes and standards.'
+                ],
+                qualifications: [
+                    'Civil engineering degree with practical project experience.',
+                    'Solid understanding of structural and civil systems.',
+                    'Familiarity with quality, safety, and regulatory standards.'
+                ]
+            },
+            'quantity-surveyor': {
+                title: 'Quantity Surveyor',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Manage project cost planning, estimation, and valuation throughout construction lifecycle.',
+                responsibilities: [
+                    'Prepare BOQs, cost estimates, and budget forecasts.',
+                    'Evaluate contractor claims and payment certificates.',
+                    'Track cost variance and advise on commercial controls.'
+                ],
+                qualifications: [
+                    'Experience in quantity surveying or cost management.',
+                    'Strong commercial analysis and measurement skills.',
+                    'Knowledge of contracts, valuations, and procurement cycles.'
+                ]
+            },
+            architect: {
+                title: 'Architect',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Design functional, market-fit, and compliant property concepts from planning to delivery.',
+                responsibilities: [
+                    'Develop architectural concepts and presentation-ready designs.',
+                    'Coordinate with engineering teams for integrated drawings.',
+                    'Support site teams with clarifications and design adjustments.'
+                ],
+                qualifications: [
+                    'Professional architecture experience across design phases.',
+                    'Strong design communication and drafting capabilities.',
+                    'Understanding of planning approvals and construction documentation.'
+                ]
+            },
+            'structural-engineer': {
+                title: 'Structural Engineer',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Design and validate structural systems for safety, durability, and code compliance.',
+                responsibilities: [
+                    'Prepare structural calculations and detailed designs.',
+                    'Review on-site implementation against design intent.',
+                    'Support technical problem-solving for structural issues.'
+                ],
+                qualifications: [
+                    'Experience in structural analysis and design.',
+                    'Strong understanding of building codes and load design.',
+                    'Ability to collaborate closely with civil and architectural teams.'
+                ]
+            },
+            'mep-engineer': {
+                title: 'MEP Engineer',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Coordinate mechanical, electrical, and plumbing systems for reliable project delivery.',
+                responsibilities: [
+                    'Review and coordinate MEP drawings and installation plans.',
+                    'Monitor MEP works for quality and compliance.',
+                    'Resolve interdisciplinary clashes with design and site teams.'
+                ],
+                qualifications: [
+                    'MEP engineering experience in building projects.',
+                    'Strong technical knowledge across MEP systems.',
+                    'Capability to coordinate multiple contractors and disciplines.'
+                ]
+            },
+            'procurement-engineer': {
+                title: 'Procurement Engineer',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Ensure timely and cost-effective sourcing of construction materials and technical equipment.',
+                responsibilities: [
+                    'Source vendors and evaluate technical and commercial proposals.',
+                    'Manage procurement schedules aligned to project timelines.',
+                    'Track supplier performance, delivery quality, and lead times.'
+                ],
+                qualifications: [
+                    'Procurement experience in construction or technical projects.',
+                    'Strong negotiation and vendor management skills.',
+                    'Ability to balance quality, timelines, and commercial targets.'
+                ]
+            },
+            'construction-supervisor': {
+                title: 'Construction Supervisor',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Supervise daily construction execution to ensure quality workmanship and schedule discipline.',
+                responsibilities: [
+                    'Coordinate labor and subcontractor activities on-site.',
+                    'Track daily productivity and resolve field bottlenecks.',
+                    'Report progress and escalate technical/safety issues quickly.'
+                ],
+                qualifications: [
+                    'Hands-on supervision experience in building construction.',
+                    'Strong site coordination and communication ability.',
+                    'Awareness of quality and safety requirements on site.'
+                ]
+            },
+            'quality-control-engineer': {
+                title: 'Quality Control Engineer',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Drive quality assurance processes and ensure construction outputs meet specification standards.',
+                responsibilities: [
+                    'Develop inspection test plans and quality checklists.',
+                    'Conduct quality audits on materials and completed works.',
+                    'Track non-conformities and follow through corrective actions.'
+                ],
+                qualifications: [
+                    'Experience in QA/QC for construction projects.',
+                    'Strong documentation and defect-tracking skills.',
+                    'Good technical judgment for quality acceptance criteria.'
+                ]
+            },
+            'hse-officer': {
+                title: 'HSE Officer',
+                team: 'Construction & Site',
+                location: 'Lagos / Hybrid',
+                purpose: 'Promote safe working culture and ensure compliance with health, safety, and environmental standards.',
+                responsibilities: [
+                    'Implement HSE policies and monitor compliance at site level.',
+                    'Conduct risk assessments and safety trainings.',
+                    'Investigate incidents and track preventive improvements.'
+                ],
+                qualifications: [
+                    'Practical HSE experience in site environments.',
+                    'Knowledge of hazard control and incident reporting.',
+                    'Relevant safety certifications are an advantage.'
+                ]
+            },
+            'internship-program': {
+                title: 'Internship Program',
+                team: 'Internship & Graduate Program',
+                location: 'Lagos / Hybrid',
+                purpose: 'Provide hands-on exposure for early-career talent across core business units.',
+                responsibilities: [
+                    'Support team projects under structured mentorship.',
+                    'Contribute to research, reporting, and task execution.',
+                    'Participate in learning sessions and performance check-ins.'
+                ],
+                qualifications: [
+                    'Current student or recent graduate.',
+                    'Strong learning agility and communication skills.',
+                    'Demonstrated interest in real estate or business operations.'
+                ]
+            },
+            'graduate-trainee-program': {
+                title: 'Graduate Trainee Program',
+                team: 'Internship & Graduate Program',
+                location: 'Lagos / Hybrid',
+                purpose: 'Develop high-potential graduates through rotational exposure and practical project ownership.',
+                responsibilities: [
+                    'Complete structured rotations across business functions.',
+                    'Execute assigned projects with measurable outcomes.',
+                    'Present insights and recommendations to leadership.'
+                ],
+                qualifications: [
+                    'Recent graduate with strong academic and leadership potential.',
+                    'Analytical mindset and execution discipline.',
+                    'Interest in long-term career growth in real estate.'
+                ]
+            },
+            'general-manager': {
+                title: 'General Manager',
+                team: 'Senior Management',
+                location: 'Lagos / Hybrid',
+                purpose: 'Lead cross-functional business performance and drive strategic growth initiatives.',
+                responsibilities: [
+                    'Own operational performance and strategic execution.',
+                    'Align teams around priorities, KPIs, and delivery standards.',
+                    'Drive revenue, efficiency, and quality outcomes at scale.'
+                ],
+                qualifications: [
+                    'Senior leadership experience in operations or business management.',
+                    'Strong commercial acumen and people leadership ability.',
+                    'Track record of delivering measurable business results.'
+                ]
+            },
+            'head-of-operations': {
+                title: 'Head of Operations',
+                team: 'Senior Management',
+                location: 'Lagos / Hybrid',
+                purpose: 'Build and optimize operational systems that improve delivery speed, quality, and customer confidence.',
+                responsibilities: [
+                    'Design scalable operational processes across units.',
+                    'Monitor performance dashboards and operational risk.',
+                    'Lead continuous improvement across fulfillment and service delivery.'
+                ],
+                qualifications: [
+                    'Extensive operations leadership experience.',
+                    'Strong process design, KPI governance, and execution skills.',
+                    'Ability to lead large teams and multi-stakeholder workflows.'
+                ]
+            }
+        });
+
         const params = new URLSearchParams(window.location.search);
         const key = params.get('role') || 'software-engineer';
         const role = roles[key] || roles['software-engineer'];
+        const teamDetailTemplates = {
+            'Sales & Investment': {
+                snapshot: ['Department: Commercial Growth', 'Employment Type: Full-time', 'Experience Level: Mid-Senior', 'Reporting Line: Commercial Director'],
+                workModel: ['Work setup: Hybrid (field/client meetings + office execution).', 'Compensation: Competitive base salary + performance incentives tied to targets.', 'Benefits: Health cover, learning support, and structured career progression.'],
+                aboutYou: ['You are confident presenting value to clients and decision-makers.', 'You enjoy target-driven work and can stay organized under pressure.', 'You follow through consistently from first contact to final close.'],
+                successMetrics: ['Consistent achievement of monthly pipeline and conversion targets.', 'Improved client retention and referral volume in your territory.', 'Clear CRM hygiene, forecasting accuracy, and deal quality.'],
+                deliverables: ['Own and improve a reliable weekly pipeline cadence.', 'Close priority deals while maintaining quality of client documentation.', 'Present territory performance insights with practical optimization actions.'],
+                tools: ['CRM and pipeline management tools', 'Client proposal templates and sales collateral', 'Reporting dashboards for conversion and revenue tracking'],
+            },
+            'Creative & Media': {
+                snapshot: ['Department: Brand & Communications', 'Employment Type: Full-time', 'Experience Level: Mid-level', 'Reporting Line: Creative Lead'],
+                workModel: ['Work setup: Hybrid/Remote depending on campaign schedule.', 'Compensation: Role-based salary with project-based performance recognition.', 'Benefits: Creative tool stack, training budget, and mentorship access.'],
+                aboutYou: ['You combine creativity with business context and audience understanding.', 'You can turn briefs into polished output with minimal supervision.', 'You embrace feedback and iterate quickly without losing quality.'],
+                successMetrics: ['Delivery of high-performing campaign assets across channels.', 'Improved engagement and content consistency over time.', 'Strong collaboration with marketing, product, and sales teams.'],
+                deliverables: ['Ship campaign-ready assets within agreed deadlines.', 'Improve content quality and consistency across platforms.', 'Contribute to measurable brand and performance marketing outcomes.'],
+                tools: ['Adobe Creative Suite / equivalent tools', 'Content planning and collaboration boards', 'Analytics dashboards for campaign performance'],
+            },
+            'Operations & CFU': {
+                snapshot: ['Department: Customer Fulfillment Unit', 'Employment Type: Full-time', 'Experience Level: Mid-level', 'Reporting Line: Operations Manager'],
+                workModel: ['Work setup: Hybrid with regular office and client-process coordination.', 'Compensation: Competitive salary with operational performance-based growth.', 'Benefits: Health plan, structured onboarding, and progression pathways.'],
+                aboutYou: ['You are detail-oriented and excellent at process follow-through.', 'You communicate with empathy while maintaining operational clarity.', 'You can coordinate multiple stakeholders and close loops quickly.'],
+                successMetrics: ['Faster turnaround time for fulfillment milestones.', 'Reduced unresolved customer issues and escalations.', 'Higher client confidence through clear process communication.'],
+                deliverables: ['Improve fulfillment turnaround for key customer milestones.', 'Reduce escalations through stronger communication and tracking.', 'Establish reliable weekly reporting on process performance.'],
+                tools: ['CRM/fulfillment tracking systems', 'Customer ticketing and communication channels', 'Operational KPI reporting templates'],
+            },
+            Technology: {
+                snapshot: ['Department: Product & Engineering', 'Employment Type: Full-time', 'Experience Level: Mid-Senior', 'Reporting Line: Head of Technology'],
+                workModel: ['Work setup: Hybrid/Remote with sprint-based delivery cycles.', 'Compensation: Market-aligned salary with growth and performance reviews.', 'Benefits: Engineering tools, learning budget, and flexible collaboration model.'],
+                aboutYou: ['You are practical, product-minded, and quality-driven in execution.', 'You can break down complex problems into reliable solutions.', 'You collaborate well with non-technical teams and explain trade-offs clearly.'],
+                successMetrics: ['Stable feature delivery with reduced production incidents.', 'Improved internal workflow efficiency through automation.', 'Stronger code quality, observability, and maintainability.'],
+                deliverables: ['Deliver agreed sprint outcomes with production-ready quality.', 'Reduce friction in at least one core internal workflow.', 'Improve reliability metrics and documentation for key services.'],
+                tools: ['Version control and CI/CD workflows', 'Issue tracking and sprint planning tools', 'Monitoring/logging and API collaboration platforms'],
+            },
+            'Legal & Compliance': {
+                snapshot: ['Department: Risk, Legal & Governance', 'Employment Type: Full-time', 'Experience Level: Mid-Senior', 'Reporting Line: Head of Legal'],
+                workModel: ['Work setup: Hybrid with office/legal documentation coordination.', 'Compensation: Competitive salary aligned with legal and compliance scope.', 'Benefits: Professional development support and cross-functional exposure.'],
+                aboutYou: ['You bring strong judgment and can balance speed with compliance.', 'You communicate legal risk in practical business language.', 'You are proactive in identifying and closing compliance gaps.'],
+                successMetrics: ['Reduced legal exposure through stronger contracts and controls.', 'Improved audit readiness and policy adherence.', 'Faster legal turnaround for critical business processes.'],
+                deliverables: ['Create stronger contract review and approval turnaround.', 'Close high-priority compliance gaps identified in internal controls.', 'Publish clear legal/compliance guidance for business teams.'],
+                tools: ['Contract/document management systems', 'Compliance tracking checklists and audit logs', 'Legal case and policy documentation repositories'],
+            },
+            'Security & Safety': {
+                snapshot: ['Department: Corporate Services', 'Employment Type: Full-time', 'Experience Level: Mid-level', 'Reporting Line: Operations Director'],
+                workModel: ['Work setup: Primarily on-site/hybrid based on operational needs.', 'Compensation: Competitive salary with role-based risk/shift considerations.', 'Benefits: Safety gear support, health cover, and training refreshers.'],
+                aboutYou: ['You remain calm under pressure and respond decisively to incidents.', 'You enforce standards consistently while maintaining team trust.', 'You are disciplined about reporting and preventive action.'],
+                successMetrics: ['Lower safety incidents and stronger site compliance scores.', 'Improved incident response times and preventive controls.', 'Consistent safety awareness across teams and vendors.'],
+                deliverables: ['Conduct baseline risk and incident readiness reviews.', 'Improve preventive controls at priority sites.', 'Increase HSE/security compliance adherence across teams.'],
+                tools: ['Incident reporting templates and logs', 'Access control and surveillance systems', 'HSE inspection checklists and compliance trackers'],
+            },
+            'Office & Admin': {
+                snapshot: ['Department: Administration', 'Employment Type: Full-time', 'Experience Level: Entry-Mid', 'Reporting Line: Admin Manager'],
+                workModel: ['Work setup: On-site/Hybrid based on office operations.', 'Compensation: Structured salary with performance-linked growth reviews.', 'Benefits: Professional development and internal mobility opportunities.'],
+                aboutYou: ['You are highly organized and proactive in daily execution.', 'You keep communication clear and tasks well-prioritized.', 'You are reliable with documentation and operational follow-through.'],
+                successMetrics: ['Improved office efficiency and service response time.', 'Accurate records and better administrative process consistency.', 'Positive internal stakeholder feedback on support quality.'],
+                deliverables: ['Stabilize core admin workflows and turnaround standards.', 'Improve service levels for internal support requests.', 'Maintain accurate records and reduce process delays.'],
+                tools: ['Office productivity suites', 'Document and records management systems', 'Internal service request trackers'],
+            },
+            'Marketing & Ads': {
+                snapshot: ['Department: Growth Marketing', 'Employment Type: Full-time', 'Experience Level: Mid-Senior', 'Reporting Line: Head of Growth'],
+                workModel: ['Work setup: Hybrid/Remote with campaign-driven planning cycles.', 'Compensation: Base salary + performance-driven growth incentives.', 'Benefits: Marketing tools, testing budgets, and upskilling programs.'],
+                aboutYou: ['You think in metrics and can connect spend to outcomes.', 'You are comfortable testing hypotheses and iterating quickly.', 'You communicate campaign insights in actionable terms.'],
+                successMetrics: ['Improved lead quality, CAC efficiency, and campaign ROI.', 'Consistent optimization cadence and reporting reliability.', 'Growth in qualified opportunities from paid channels.'],
+                deliverables: ['Launch and optimize high-priority paid campaigns.', 'Improve lead quality and conversion outcomes from ad channels.', 'Deliver clear weekly insight reports and optimization plans.'],
+                tools: ['Ad platforms (Meta/Google and related channels)', 'Attribution and analytics dashboards', 'Creative testing workflows and planning boards'],
+            },
+            'Construction & Site': {
+                snapshot: ['Department: Projects & Development', 'Employment Type: Full-time', 'Experience Level: Mid-Senior', 'Reporting Line: Project Director'],
+                workModel: ['Work setup: Predominantly on-site with periodic office coordination.', 'Compensation: Role-based salary with project delivery performance reviews.', 'Benefits: Site support, safety provisions, and technical training opportunities.'],
+                aboutYou: ['You are safety-conscious and technically grounded in site realities.', 'You can coordinate multiple disciplines without losing quality.', 'You are decisive in resolving field constraints and delivery risks.'],
+                successMetrics: ['On-time completion of project milestones and handovers.', 'Reduced rework through stronger quality assurance discipline.', 'Better cost control and site execution predictability.'],
+                deliverables: ['Deliver first-phase site milestones with quality compliance.', 'Reduce rework through improved planning and supervision discipline.', 'Strengthen coordination rhythm between design, procurement, and execution teams.'],
+                tools: ['Project schedules and construction planning tools', 'Site inspection and QA/QC documentation', 'Procurement and contractor coordination trackers'],
+            },
+            'Internship & Graduate Program': {
+                snapshot: ['Department: Talent Development', 'Employment Type: Program-based', 'Experience Level: Entry', 'Reporting Line: Program Coordinator'],
+                workModel: ['Work setup: Structured hybrid/on-site learning rotations.', 'Compensation: Program stipend/salary based on placement track.', 'Benefits: Mentorship, structured learning curriculum, and evaluation feedback.'],
+                aboutYou: ['You are highly coachable and eager to learn quickly.', 'You can apply feedback and improve output iteration by iteration.', 'You show ownership, curiosity, and professionalism in team settings.'],
+                successMetrics: ['Fast onboarding and measurable contribution within first quarter.', 'Strong learning progression across assigned rotations.', 'High-quality task delivery and stakeholder feedback.'],
+                deliverables: ['Complete onboarding goals and assigned learning milestones.', 'Deliver rotation tasks with measurable quality and timeliness.', 'Present end-of-cycle improvement recommendations to mentors.'],
+                tools: ['Learning modules and task trackers', 'Collaboration suites for project work', 'Performance feedback and development templates'],
+            },
+            'Senior Management': {
+                snapshot: ['Department: Executive Leadership', 'Employment Type: Full-time', 'Experience Level: Senior/Executive', 'Reporting Line: Group Executive Team'],
+                workModel: ['Work setup: Hybrid with cross-business leadership responsibilities.', 'Compensation: Executive-level package tied to strategic business outcomes.', 'Benefits: Leadership development, strategic decision ownership, and long-term growth incentives.'],
+                aboutYou: ['You make high-quality decisions in complex environments.', 'You can align teams around strategy, priorities, and accountability.', 'You combine commercial judgment with strong people leadership.'],
+                successMetrics: ['Clear progress on strategic goals and business KPIs.', 'Stronger cross-functional alignment and execution speed.', 'Sustainable growth in revenue, quality, and operational resilience.'],
+                deliverables: ['Define and align quarterly priorities across critical functions.', 'Improve leadership operating cadence and KPI governance.', 'Deliver measurable progress on strategic transformation initiatives.'],
+                tools: ['Executive KPI dashboards and reporting reviews', 'Strategic planning and governance frameworks', 'Cross-functional operating cadence and review systems'],
+            },
+        };
 
-        document.title = `${role.title} | GText Careers`;
-        document.getElementById('roleTitle').textContent = role.title;
-        document.getElementById('roleTeam').textContent = role.team;
-        document.getElementById('roleLocation').textContent = role.location;
-        document.getElementById('rolePurpose').textContent = role.purpose;
+        const fallbackTemplate = {
+            snapshot: ['Department: Core Operations', 'Employment Type: Full-time', 'Experience Level: Mid-level', 'Reporting Line: Hiring Manager'],
+            workModel: ['Work setup: Hybrid/On-site based on role requirements.', 'Compensation: Competitive and benchmarked to experience and scope.', 'Benefits: Health support, learning opportunities, and growth pathways.'],
+            aboutYou: ['You communicate clearly and collaborate effectively across teams.', 'You are proactive and comfortable taking ownership of outcomes.', 'You value speed, clarity, and execution quality.'],
+            successMetrics: ['You ramp quickly and contribute meaningful value in the first 90 days.', 'You improve team outcomes through quality work and reliable delivery.', 'You help strengthen systems and standards as the business scales.'],
+            deliverables: ['Build context quickly and take ownership of key priorities.', 'Deliver measurable contribution in your first 90 days.', 'Strengthen quality and execution standards in your function.'],
+            tools: ['Core collaboration and communication tools', 'Role-specific workflow systems', 'Performance and reporting templates'],
+        };
 
-        const roleResponsibilities = document.getElementById('roleResponsibilities');
-        role.responsibilities.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = item;
-            roleResponsibilities.appendChild(li);
-        });
+        const appendUniqueItems = (base, extras) => [...new Set([...(base || []), ...(extras || [])])];
+        const teamTemplate = teamDetailTemplates[role.team] || fallbackTemplate;
+        const enrichedRole = {
+            ...role,
+            responsibilities: appendUniqueItems(role.responsibilities, [
+                'Collaborate cross-functionally to remove blockers and improve delivery speed.',
+                'Provide periodic updates, insights, and recommendations to relevant stakeholders.',
+            ]),
+            qualifications: appendUniqueItems(role.qualifications, [
+                'Strong stakeholder communication and professional writing skills.',
+                'Ability to work with clear ownership, deadlines, and performance expectations.',
+            ]),
+            snapshot: teamTemplate.snapshot,
+            workModel: teamTemplate.workModel,
+            aboutYou: teamTemplate.aboutYou,
+            successMetrics: teamTemplate.successMetrics,
+            deliverables: teamTemplate.deliverables,
+            tools: teamTemplate.tools,
+            hiringProcess: [
+                'Application review by the recruitment team (typically within 3-5 business days).',
+                'Introductory call to assess role fit, communication, and motivation.',
+                'Role-specific assessment, portfolio review, or technical/functional case.',
+                'Final interview with hiring leadership and team stakeholders.',
+                'Reference checks (where applicable) and offer discussion.',
+            ],
+        };
 
-        const roleQualifications = document.getElementById('roleQualifications');
-        role.qualifications.forEach(item => {
-            const li = document.createElement('li');
-            li.textContent = item;
-            roleQualifications.appendChild(li);
-        });
+        document.title = `${enrichedRole.title} | GText Careers`;
+        document.getElementById('roleTitle').textContent = enrichedRole.title;
+        document.getElementById('roleTeam').textContent = enrichedRole.team;
+        document.getElementById('roleLocation').textContent = enrichedRole.location;
+        document.getElementById('rolePurpose').textContent = enrichedRole.purpose;
+
+        const renderList = (elementId, items) => {
+            const list = document.getElementById(elementId);
+            if (!list) return;
+            list.innerHTML = '';
+            items.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                list.appendChild(li);
+            });
+        };
+
+        renderList('roleSnapshot', enrichedRole.snapshot);
+        renderList('roleWorkModel', enrichedRole.workModel);
+        renderList('roleResponsibilities', enrichedRole.responsibilities);
+        renderList('roleQualifications', enrichedRole.qualifications);
+        renderList('roleAboutYou', enrichedRole.aboutYou);
+        renderList('roleSuccessMetrics', enrichedRole.successMetrics);
+        renderList('roleDeliverables', enrichedRole.deliverables);
+        renderList('roleTools', enrichedRole.tools);
+        renderList('roleHiringProcess', enrichedRole.hiringProcess);
 
         // Modal + email application flow
         const modal = document.getElementById('applyModal');
@@ -299,6 +838,8 @@
         const successMessage = document.getElementById('successMessage');
         const selectedRoleInput = document.getElementById('selectedRoleInput');
         const roleSelectInput = document.getElementById('roleSelectInput');
+        const customRoleGroup = document.getElementById('customRoleGroup');
+        const customRoleInput = document.getElementById('customRoleInput');
         const fullNameInput = document.getElementById('fullNameInput');
         const emailInput = document.getElementById('emailInput');
         const phoneInput = document.getElementById('phoneInput');
@@ -314,7 +855,47 @@
             'CFU Specialist',
             'Software Engineer',
             'AI Engineer',
+            'Legal Counsel',
+            'Compliance Officer',
+            'Corporate Security Lead',
+            'Site Safety Officer',
+            'Office Assistant',
+            'Administrative Executive',
+            'Performance Marketing Specialist',
+            'Media Buying Manager',
+            'Construction Project Manager',
+            'Site Engineer',
+            'Civil Engineer',
+            'Quantity Surveyor',
+            'Architect',
+            'Structural Engineer',
+            'MEP Engineer',
+            'Procurement Engineer',
+            'Construction Supervisor',
+            'Quality Control Engineer',
+            'HSE Officer',
+            'Internship Program',
+            'Graduate Trainee Program',
+            'General Manager',
+            'Head of Operations',
         ];
+
+        const toggleCustomRoleInput = () => {
+            const isOther = roleSelectInput?.value === 'Other';
+            if (customRoleGroup) customRoleGroup.style.display = isOther ? 'grid' : 'none';
+            if (customRoleInput) {
+                customRoleInput.required = Boolean(isOther);
+                if (!isOther) {
+                    customRoleInput.value = '';
+                    customRoleInput.setCustomValidity('');
+                }
+            }
+        };
+
+        const getFinalRoleValue = () => {
+            if (roleSelectInput?.value === 'Other') return customRoleInput?.value?.trim() || '';
+            return roleSelectInput?.value || selectedRoleInput?.value || role.title;
+        };
 
         const isValidHttpUrl = (value) => {
             try {
@@ -327,6 +908,7 @@
 
         const validateApplicationForm = () => {
             const roleValue = roleSelectInput?.value?.trim() || '';
+            const customRole = customRoleInput?.value?.trim() || '';
             const fullName = fullNameInput?.value?.trim() || '';
             const email = emailInput?.value?.trim() || '';
             const phone = phoneInput?.value?.trim() || '';
@@ -339,10 +921,16 @@
             phoneInput?.setCustomValidity('');
             portfolioInput?.setCustomValidity('');
             messageInput?.setCustomValidity('');
+            customRoleInput?.setCustomValidity('');
 
             if (!roleValue) {
                 roleSelectInput?.setCustomValidity('Please select a preferred role.');
                 roleSelectInput?.reportValidity();
+                return false;
+            }
+            if (roleValue === 'Other' && customRole.length < 2) {
+                customRoleInput?.setCustomValidity('Please enter your role/category.');
+                customRoleInput?.reportValidity();
                 return false;
             }
             if (fullName.length < 2) {
@@ -388,6 +976,7 @@
             if (modalRoleName) modalRoleName.textContent = roleName || 'Select your preferred role and submit your application.';
             if (applyForm) applyForm.style.display = 'grid';
             if (successMessage) successMessage.style.display = 'none';
+            toggleCustomRoleInput();
             modalSource = source;
         };
 
@@ -430,6 +1019,8 @@
             });
         });
 
+        roleSelectInput?.addEventListener('change', toggleCustomRoleInput);
+
         document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
             btn.addEventListener('click', closeModal);
         });
@@ -441,7 +1032,7 @@
         applyForm.addEventListener('submit', (e) => {
             e.preventDefault();
             if (!validateApplicationForm()) return;
-            const selectedRole = roleSelectInput?.value || selectedRoleInput?.value || role.title;
+            const selectedRole = getFinalRoleValue();
             const fullName = fullNameInput?.value?.trim() || '';
             const email = emailInput?.value?.trim() || '';
             const phone = phoneInput?.value?.trim() || '';
@@ -465,7 +1056,7 @@
                 message: `Role: ${selectedRole}\nFull Name: ${fullName}\nEmail: ${email}\nPhone: ${phone}\nPortfolio/LinkedIn: ${portfolio}\nShort Note: ${note}`,
             };
 
-            fetch('https://formspree.io/f/mzdojbrq', {
+            fetch('/api/applications', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

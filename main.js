@@ -114,6 +114,8 @@ const applyForm = document.getElementById('applicationForm');
 const successMessage = document.getElementById('successMessage');
 const selectedRoleInput = document.getElementById('selectedRoleInput');
 const roleSelectInput = document.getElementById('roleSelectInput');
+const customRoleGroup = document.getElementById('customRoleGroup');
+const customRoleInput = document.getElementById('customRoleInput');
 
 const fullNameInput = document.getElementById('fullNameInput');
 const emailInput = document.getElementById('emailInput');
@@ -130,7 +132,62 @@ const knownRoles = [
     'CFU Specialist',
     'Software Engineer',
     'AI Engineer',
+    'Legal Counsel',
+    'Compliance Officer',
+    'Corporate Security Lead',
+    'Site Safety Officer',
+    'Office Assistant',
+    'Administrative Executive',
+    'Performance Marketing Specialist',
+    'Media Buying Manager',
+    'Construction Project Manager',
+    'Site Engineer',
+    'Civil Engineer',
+    'Quantity Surveyor',
+    'Architect',
+    'Structural Engineer',
+    'MEP Engineer',
+    'Procurement Engineer',
+    'Construction Supervisor',
+    'Quality Control Engineer',
+    'HSE Officer',
+    'Internship Program',
+    'Graduate Trainee Program',
+    'General Manager',
+    'Head of Operations',
 ];
+
+const toRoleSlug = (value) =>
+    (value || '')
+        .toLowerCase()
+        .replace(/&/g, 'and')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+
+document.querySelectorAll('.job-card').forEach((card) => {
+    const viewLink = card.querySelector('.view-link');
+    const roleName = card.getAttribute('data-role') || '';
+    if (viewLink && roleName) {
+        viewLink.setAttribute('href', `role-details.html?role=${toRoleSlug(roleName)}`);
+    }
+});
+
+const toggleCustomRoleInput = () => {
+    const isOther = roleSelectInput?.value === 'Other';
+    if (customRoleGroup) customRoleGroup.style.display = isOther ? 'grid' : 'none';
+    if (customRoleInput) {
+        customRoleInput.required = Boolean(isOther);
+        if (!isOther) {
+            customRoleInput.value = '';
+            customRoleInput.setCustomValidity('');
+        }
+    }
+};
+
+const getFinalRoleValue = () => {
+    if (roleSelectInput?.value === 'Other') return customRoleInput?.value?.trim() || '';
+    return roleSelectInput?.value || selectedRoleInput?.value || 'Open Role';
+};
 
 const isValidHttpUrl = (value) => {
     try {
@@ -144,6 +201,7 @@ const isValidHttpUrl = (value) => {
 const validateApplicationForm = () => {
     if (!applyForm) return false;
     const role = roleSelectInput?.value?.trim() || '';
+    const customRole = customRoleInput?.value?.trim() || '';
     const fullName = fullNameInput?.value?.trim() || '';
     const email = emailInput?.value?.trim() || '';
     const phone = phoneInput?.value?.trim() || '';
@@ -156,10 +214,16 @@ const validateApplicationForm = () => {
     phoneInput?.setCustomValidity('');
     portfolioInput?.setCustomValidity('');
     messageInput?.setCustomValidity('');
+    customRoleInput?.setCustomValidity('');
 
     if (!role) {
         roleSelectInput?.setCustomValidity('Please select a preferred role.');
         roleSelectInput?.reportValidity();
+        return false;
+    }
+    if (role === 'Other' && customRole.length < 2) {
+        customRoleInput?.setCustomValidity('Please enter your role/category.');
+        customRoleInput?.reportValidity();
         return false;
     }
     if (fullName.length < 2) {
@@ -205,6 +269,7 @@ const prepareModal = (roleName, source = 'index') => {
     if (modalRoleName) modalRoleName.textContent = roleName || 'Select your preferred role and submit your application.';
     if (applyForm) applyForm.style.display = 'grid';
     if (successMessage) successMessage.style.display = 'none';
+    toggleCustomRoleInput();
     modalSource = source;
 };
 
@@ -247,6 +312,8 @@ document.querySelectorAll('.modal-trigger').forEach(trigger => {
     });
 });
 
+roleSelectInput?.addEventListener('change', toggleCustomRoleInput);
+
 document.querySelectorAll('.close-modal, .close-modal-btn').forEach(btn => {
     btn.addEventListener('click', closeModal);
 });
@@ -258,7 +325,7 @@ window.addEventListener('click', (e) => {
 applyForm?.addEventListener('submit', (e) => {
     e.preventDefault();
     if (!validateApplicationForm()) return;
-    const role = roleSelectInput?.value || selectedRoleInput?.value || 'Open Role';
+    const role = getFinalRoleValue();
     const fullName = fullNameInput?.value?.trim() || '';
     const email = emailInput?.value?.trim() || '';
     const phone = phoneInput?.value?.trim() || '';
@@ -283,7 +350,7 @@ applyForm?.addEventListener('submit', (e) => {
         message: `Role: ${role}\nFull Name: ${fullName}\nEmail: ${email}\nPhone: ${phone}\nPortfolio/LinkedIn: ${portfolio}\nShort Note: ${note}`,
     };
 
-    fetch('https://formspree.io/f/mzdojbrq', {
+    fetch('/api/applications', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
