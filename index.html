@@ -34,7 +34,7 @@
             </div>
             <div class="hero-visual" data-reveal>
                 <div class="image-wrapper">
-                    <img src="assets/hero.png" alt="Futuristic Real Estate Infrastructure">
+                    <img src="assets/hero_v3.png" alt="Modern real estate infrastructure by GText Holdings">
                     <div class="glow"></div>
                 </div>
             </div>
@@ -132,7 +132,7 @@
                 <div class="team-item glass-card collapsible" data-reveal>
                     <div class="team-header">
                         <h3>Sales & Investment</h3>
-                        <span class="toggle-icon">+</span>
+                        <span class="toggle-icon">⌄</span>
                     </div>
                     <div class="team-body">
                         <p>Our frontline force driving revenue and property acquisition. We help clients build wealth through strategic real estate investments.</p>
@@ -146,7 +146,7 @@
                 <div class="team-item glass-card collapsible" data-reveal>
                     <div class="team-header">
                         <h3>Marketing & Creative</h3>
-                        <span class="toggle-icon">+</span>
+                        <span class="toggle-icon">⌄</span>
                     </div>
                     <div class="team-body">
                         <p>The storytellers and visual architects of our brand. We create high-impact content that showcases our luxury developments.</p>
@@ -160,7 +160,7 @@
                 <div class="team-item glass-card collapsible" data-reveal>
                     <div class="team-header">
                         <h3>Operations & CFU</h3>
-                        <span class="toggle-icon">+</span>
+                        <span class="toggle-icon">⌄</span>
                     </div>
                     <div class="team-body">
                         <p>The Customer Fulfillment Unit (CFU) ensures a seamless journey from payment to possession. We manage the logistics of trust.</p>
@@ -174,7 +174,7 @@
                 <div class="team-item glass-card collapsible" data-reveal>
                     <div class="team-header">
                         <h3>Tech & Property Development</h3>
-                        <span class="toggle-icon">+</span>
+                        <span class="toggle-icon">⌄</span>
                     </div>
                     <div class="team-body">
                         <p>Building the smart infrastructure and digital platforms that power modern real estate in Africa.</p>
@@ -248,23 +248,62 @@
                 <h2 class="gradient-text">Open Positions</h2>
                 <p>Ready to help us build the future?</p>
             </div>
+
+            <div class="opportunities-toolbar glass-card" data-reveal>
+                <div class="toolbar-field">
+                    <label for="roleSearch">Search role</label>
+                    <input id="roleSearch" type="text" placeholder="e.g. Sales Manager">
+                </div>
+                <div class="toolbar-field">
+                    <label for="teamFilter">Team</label>
+                    <select id="teamFilter">
+                        <option value="all">All Teams</option>
+                        <option value="Sales & Investment">Sales & Investment</option>
+                        <option value="Creative & Media">Creative & Media</option>
+                        <option value="Operations & CFU">Operations & CFU</option>
+                        <option value="Technology">Technology</option>
+                    </select>
+                </div>
+                <div class="toolbar-field">
+                    <label for="locationFilter">Location</label>
+                    <select id="locationFilter">
+                        <option value="all">All Locations</option>
+                        <option value="Lagos / Hybrid">Lagos / Hybrid</option>
+                        <option value="Remote / Hybrid">Remote / Hybrid</option>
+                        <option value="Remote">Remote</option>
+                    </select>
+                </div>
+                <div class="toolbar-meta">
+                    <span id="rolesCount">7 opportunities</span>
+                </div>
+            </div>
+            <div id="noResultsMessage" class="no-results-message glass-card" style="display: none;">
+                <h4>No opportunities match your filters.</h4>
+                <p>Try changing the team, location, or search term.</p>
+            </div>
             
             <div class="job-category" data-reveal>
                 <h3>Sales & Investment</h3>
                 <div class="jobs-list">
-                    <div class="job-card glass-card">
+                    <div class="job-card glass-card" data-role="Sales Manager" data-team="Sales & Investment" data-location="Lagos / Hybrid">
                         <div class="job-main">
                             <h4>Sales Manager</h4>
                             <span class="location">Lagos / Hybrid</span>
                         </div>
-                        <a href="#" class="apply-link">Apply Now →</a>
+                        <div class="job-actions">
+                            <a href="role-details.html?role=sales-manager" class="view-link">View Details</a>
+                            <a href="#" class="apply-link">Apply Now →</a>
+                        </div>
                     </div>
-                    <div class="job-card glass-card">
+                    <div class="job-card glass-card" data-role="Investment Consultant" data-team="Sales & Investment" data-location="Remote / Hybrid">
                         <div class="job-main">
                             <h4>Investment Consultant</h4>
                             <span class="location">Remote / Hybrid</span>
                         </div>
-                        <a href="#" class="apply-link">Apply Now →</a>
+                        <div class="job-actions">
+                            <a href="role-details.html?role=investment-consultant" class="view-link">View Details</a>
+                            <a href="#" class="apply-link">Apply Now →</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -272,19 +311,25 @@
             <div class="job-category" data-reveal>
                 <h3>Creative & Media</h3>
                 <div class="jobs-list">
-                    <div class="job-card glass-card">
+                    <div class="job-card glass-card" data-role="Video Editor" data-team="Creative & Media" data-location="Remote">
                         <div class="job-main">
                             <h4>Video Editor</h4>
                             <span class="location">Remote</span>
                         </div>
-                        <a href="#" class="apply-link">Apply Now →</a>
+                        <div class="job-actions">
+                            <a href="role-details.html?role=video-editor" class="view-link">View Details</a>
+                            <a href="#" class="apply-link">Apply Now →</a>
+                        </div>
                     </div>
-                    <div class="job-card glass-card">
+                    <div class="job-card glass-card" data-role="Graphic Designer" data-team="Creative & Media" data-location="Remote">
                         <div class="job-main">
                             <h4>Graphic Designer</h4>
                             <span class="location">Remote</span>
                         </div>
-                        <a href="#" class="apply-link">Apply Now →</a>
+                        <div class="job-actions">
+                            <a href="role-details.html?role=graphic-designer" class="view-link">View Details</a>
+                            <a href="#" class="apply-link">Apply Now →</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -292,12 +337,15 @@
             <div class="job-category" data-reveal>
                 <h3>Operations & CFU</h3>
                 <div class="jobs-list">
-                    <div class="job-card glass-card">
+                    <div class="job-card glass-card" data-role="CFU Specialist" data-team="Operations & CFU" data-location="Lagos / Hybrid">
                         <div class="job-main">
                             <h4>CFU Specialist</h4>
                             <span class="location">Lagos / Hybrid</span>
                         </div>
-                        <a href="#" class="apply-link">Apply Now →</a>
+                        <div class="job-actions">
+                            <a href="role-details.html?role=cfu-specialist" class="view-link">View Details</a>
+                            <a href="#" class="apply-link">Apply Now →</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -305,19 +353,25 @@
             <div class="job-category" data-reveal>
                 <h3>Technology</h3>
                 <div class="jobs-list">
-                    <div class="job-card glass-card">
+                    <div class="job-card glass-card" data-role="Software Engineer" data-team="Technology" data-location="Remote / Hybrid">
                         <div class="job-main">
                             <h4>Software Engineer</h4>
                             <span class="location">Remote / Hybrid</span>
                         </div>
-                        <a href="#" class="apply-link">Apply Now →</a>
+                        <div class="job-actions">
+                            <a href="role-details.html?role=software-engineer" class="view-link">View Details</a>
+                            <a href="#" class="apply-link">Apply Now →</a>
+                        </div>
                     </div>
-                    <div class="job-card glass-card">
+                    <div class="job-card glass-card" data-role="AI Engineer" data-team="Technology" data-location="Remote / Hybrid">
                         <div class="job-main">
                             <h4>AI Engineer</h4>
                             <span class="location">Remote / Hybrid</span>
                         </div>
-                        <a href="#" class="apply-link">Apply Now →</a>
+                        <div class="job-actions">
+                            <a href="role-details.html?role=ai-engineer" class="view-link">View Details</a>
+                            <a href="#" class="apply-link">Apply Now →</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -327,7 +381,7 @@
                     <h3>Don’t See A Role That Fits?</h3>
                     <p>We’re always interested in meeting thoughtful builders, designers, operators, and problem-solvers. Send us your resume, portfolio, or LinkedIn profile.</p>
                 </div>
-                <a href="#" class="btn btn-primary apply-link-talent">Join Our Talent Pool</a>
+                <a href="mailto:hr@gtextholdings.com?subject=Talent%20Pool%20Application" class="btn btn-primary">Join Our Talent Pool</a>
             </div>
         </div>
     </section>
@@ -343,7 +397,7 @@
                     <p>No. We care more about problem-solving ability, curiosity, collaboration, and execution.</p>
                 </div>
                 <div class="faq-item glass-card" data-reveal>
-                    <h4>Is Antigravity remote-friendly?</h4>
+                    <h4>Is GText remote-friendly?</h4>
                     <p>Depending on the role, we support remote, hybrid, and on-site opportunities.</p>
                 </div>
                 <div class="faq-item glass-card" data-reveal>
@@ -364,7 +418,7 @@
             <p>We’re looking for ambitious people who want to help shape the future of real estate, investment, and technology in Africa.</p>
             <div class="hero-ctas">
                 <a href="#roles" class="btn btn-primary">Explore Open Roles</a>
-                <a href="mailto:hr@gtextholdings.com" class="btn btn-secondary">Contact Recruitment Team</a>
+                <a href="mailto:hr@gtextholdings.com?subject=Recruitment%20Inquiry" class="btn btn-secondary">Contact Recruitment Team</a>
             </div>
         </div>
     </section>
@@ -374,6 +428,7 @@
             <div class="footer-content">
                 <div class="logo">GTEXT</div>
                 <p>&copy; 2026 GText Holdings. Building the infrastructure for modern real estate.</p>
+                <p><a href="mailto:hr@gtextholdings.com">hr@gtextholdings.com</a></p>
             </div>
         </div>
     </footer>
@@ -386,24 +441,26 @@
             <p id="modalRoleName" style="margin-bottom: 2rem; color: var(--text-color); font-weight: 600;"></p>
             
             <form id="applicationForm" class="apply-form">
+                <input id="selectedRoleInput" type="hidden">
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" placeholder="Enter your full name" required>
+                    <input id="fullNameInput" type="text" placeholder="Enter your full name" required>
                 </div>
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input type="email" placeholder="email@example.com" required>
+                    <input id="emailInput" type="email" placeholder="email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input id="phoneInput" type="tel" placeholder="+234..." required>
                 </div>
                 <div class="form-group">
                     <label>Portfolio / LinkedIn Link</label>
-                    <input type="url" placeholder="https://..." required>
+                    <input id="portfolioInput" type="url" placeholder="https://..." required>
                 </div>
                 <div class="form-group">
-                    <label>Resume / CV</label>
-                    <div class="file-upload">
-                        <span>Click to upload PDF</span>
-                        <input type="file" accept=".pdf" required>
-                    </div>
+                    <label>Short Note</label>
+                    <textarea id="messageInput" rows="4" placeholder="Tell us briefly why you are a great fit."></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Submit Application</button>
             </form>
