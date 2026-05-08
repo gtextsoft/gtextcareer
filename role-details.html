@@ -121,23 +121,23 @@
                 </div>
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input id="fullNameInput" type="text" placeholder="Enter your full name" required>
+                    <input id="fullNameInput" type="text" placeholder="e.g. John Doe" autocomplete="name" minlength="2" maxlength="80" pattern="[A-Za-zÀ-ÿ'\\-.\\s]{2,80}" title="Enter a valid full name (letters and spaces)." required>
                 </div>
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input id="emailInput" type="email" placeholder="email@example.com" required>
+                    <input id="emailInput" type="email" placeholder="name@example.com" autocomplete="email" maxlength="120" required>
                 </div>
                 <div class="form-group">
                     <label>Phone Number</label>
-                    <input id="phoneInput" type="tel" placeholder="+234..." required>
+                    <input id="phoneInput" type="tel" placeholder="+234 801 234 5678" autocomplete="tel" minlength="7" maxlength="20" pattern="[0-9+()\\-\\s]{7,20}" title="Enter a valid phone number." required>
                 </div>
                 <div class="form-group">
                     <label>Portfolio / LinkedIn Link</label>
-                    <input id="portfolioInput" type="url" placeholder="https://..." required>
+                    <input id="portfolioInput" type="url" placeholder="https://linkedin.com/in/yourname" autocomplete="url" maxlength="300" required>
                 </div>
                 <div class="form-group">
                     <label>Short Note</label>
-                    <textarea id="messageInput" rows="4" placeholder="Tell us briefly why you are a great fit."></textarea>
+                    <textarea id="messageInput" rows="4" placeholder="Tell us briefly why you are a great fit (min 10 characters)." minlength="10" maxlength="1200" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.75rem;">Submit Application</button>
             </form>
@@ -316,6 +316,64 @@
             'AI Engineer',
         ];
 
+        const isValidHttpUrl = (value) => {
+            try {
+                const parsed = new URL(value);
+                return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+            } catch (_error) {
+                return false;
+            }
+        };
+
+        const validateApplicationForm = () => {
+            const roleValue = roleSelectInput?.value?.trim() || '';
+            const fullName = fullNameInput?.value?.trim() || '';
+            const email = emailInput?.value?.trim() || '';
+            const phone = phoneInput?.value?.trim() || '';
+            const portfolio = portfolioInput?.value?.trim() || '';
+            const note = messageInput?.value?.trim() || '';
+
+            roleSelectInput?.setCustomValidity('');
+            fullNameInput?.setCustomValidity('');
+            emailInput?.setCustomValidity('');
+            phoneInput?.setCustomValidity('');
+            portfolioInput?.setCustomValidity('');
+            messageInput?.setCustomValidity('');
+
+            if (!roleValue) {
+                roleSelectInput?.setCustomValidity('Please select a preferred role.');
+                roleSelectInput?.reportValidity();
+                return false;
+            }
+            if (fullName.length < 2) {
+                fullNameInput?.setCustomValidity('Please enter your full name.');
+                fullNameInput?.reportValidity();
+                return false;
+            }
+            if (!email || !emailInput?.checkValidity()) {
+                emailInput?.setCustomValidity('Please enter a valid email address.');
+                emailInput?.reportValidity();
+                return false;
+            }
+            if (phone.replace(/\D/g, '').length < 7) {
+                phoneInput?.setCustomValidity('Please enter a valid phone number.');
+                phoneInput?.reportValidity();
+                return false;
+            }
+            if (!isValidHttpUrl(portfolio)) {
+                portfolioInput?.setCustomValidity('Please enter a valid URL starting with http:// or https://');
+                portfolioInput?.reportValidity();
+                return false;
+            }
+            if (note.length < 10) {
+                messageInput?.setCustomValidity('Please provide at least 10 characters in your note.');
+                messageInput?.reportValidity();
+                return false;
+            }
+
+            return applyForm.checkValidity();
+        };
+
         const prepareModal = (roleName, source = 'role-details') => {
             if (selectedRoleInput) selectedRoleInput.value = roleName;
             if (roleSelectInput) {
@@ -382,6 +440,7 @@
 
         applyForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            if (!validateApplicationForm()) return;
             const selectedRole = roleSelectInput?.value || selectedRoleInput?.value || role.title;
             const fullName = fullNameInput?.value?.trim() || '';
             const email = emailInput?.value?.trim() || '';

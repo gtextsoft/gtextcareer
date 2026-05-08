@@ -132,6 +132,65 @@ const knownRoles = [
     'AI Engineer',
 ];
 
+const isValidHttpUrl = (value) => {
+    try {
+        const parsed = new URL(value);
+        return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+    } catch (_error) {
+        return false;
+    }
+};
+
+const validateApplicationForm = () => {
+    if (!applyForm) return false;
+    const role = roleSelectInput?.value?.trim() || '';
+    const fullName = fullNameInput?.value?.trim() || '';
+    const email = emailInput?.value?.trim() || '';
+    const phone = phoneInput?.value?.trim() || '';
+    const portfolio = portfolioInput?.value?.trim() || '';
+    const note = messageInput?.value?.trim() || '';
+
+    roleSelectInput?.setCustomValidity('');
+    fullNameInput?.setCustomValidity('');
+    emailInput?.setCustomValidity('');
+    phoneInput?.setCustomValidity('');
+    portfolioInput?.setCustomValidity('');
+    messageInput?.setCustomValidity('');
+
+    if (!role) {
+        roleSelectInput?.setCustomValidity('Please select a preferred role.');
+        roleSelectInput?.reportValidity();
+        return false;
+    }
+    if (fullName.length < 2) {
+        fullNameInput?.setCustomValidity('Please enter your full name.');
+        fullNameInput?.reportValidity();
+        return false;
+    }
+    if (!email || !emailInput?.checkValidity()) {
+        emailInput?.setCustomValidity('Please enter a valid email address.');
+        emailInput?.reportValidity();
+        return false;
+    }
+    if (phone.replace(/\D/g, '').length < 7) {
+        phoneInput?.setCustomValidity('Please enter a valid phone number.');
+        phoneInput?.reportValidity();
+        return false;
+    }
+    if (!isValidHttpUrl(portfolio)) {
+        portfolioInput?.setCustomValidity('Please enter a valid URL starting with http:// or https://');
+        portfolioInput?.reportValidity();
+        return false;
+    }
+    if (note.length < 10) {
+        messageInput?.setCustomValidity('Please provide at least 10 characters in your note.');
+        messageInput?.reportValidity();
+        return false;
+    }
+
+    return applyForm.checkValidity();
+};
+
 const prepareModal = (roleName, source = 'index') => {
     if (selectedRoleInput) selectedRoleInput.value = roleName;
     if (roleSelectInput) {
@@ -198,6 +257,7 @@ window.addEventListener('click', (e) => {
 
 applyForm?.addEventListener('submit', (e) => {
     e.preventDefault();
+    if (!validateApplicationForm()) return;
     const role = roleSelectInput?.value || selectedRoleInput?.value || 'Open Role';
     const fullName = fullNameInput?.value?.trim() || '';
     const email = emailInput?.value?.trim() || '';

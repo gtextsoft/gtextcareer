@@ -458,23 +458,23 @@
                 </div>
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input id="fullNameInput" type="text" placeholder="Enter your full name" required>
+                    <input id="fullNameInput" type="text" placeholder="e.g. John Doe" autocomplete="name" minlength="2" maxlength="80" pattern="[A-Za-zÀ-ÿ'\\-.\\s]{2,80}" title="Enter a valid full name (letters and spaces)." required>
                 </div>
                 <div class="form-group">
                     <label>Email Address</label>
-                    <input id="emailInput" type="email" placeholder="email@example.com" required>
+                    <input id="emailInput" type="email" placeholder="name@example.com" autocomplete="email" maxlength="120" required>
                 </div>
                 <div class="form-group">
                     <label>Phone Number</label>
-                    <input id="phoneInput" type="tel" placeholder="+234..." required>
+                    <input id="phoneInput" type="tel" placeholder="+234 801 234 5678" autocomplete="tel" minlength="7" maxlength="20" pattern="[0-9+()\\-\\s]{7,20}" title="Enter a valid phone number." required>
                 </div>
                 <div class="form-group">
                     <label>Portfolio / LinkedIn Link</label>
-                    <input id="portfolioInput" type="url" placeholder="https://..." required>
+                    <input id="portfolioInput" type="url" placeholder="https://linkedin.com/in/yourname" autocomplete="url" maxlength="300" required>
                 </div>
                 <div class="form-group">
                     <label>Short Note</label>
-                    <textarea id="messageInput" rows="4" placeholder="Tell us briefly why you are a great fit."></textarea>
+                    <textarea id="messageInput" rows="4" placeholder="Tell us briefly why you are a great fit (min 10 characters)." minlength="10" maxlength="1200" required></textarea>
                 </div>
                 <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Submit Application</button>
             </form>
